@@ -96,6 +96,7 @@ int GraphType<VertexType>::WeightIs(VertexType fromVertex, VertexType toVertex)
   return edges[row][col]; // check the weight in the edge
 }
 
+// WILL NEED TO HANDLE INTEGERS INSTEAD OF NAMES
 template<class VertexType>
 void GraphType<VertexType>::GetToVertices(VertexType vertex, Queue& adjVertices)
 {

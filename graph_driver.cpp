@@ -108,9 +108,11 @@ SOME CODE IS ON THE SLIDES FRO COUNTING THE NODES AND FOR ADDING AN ARC TO THE G
 DO NOT WALK THE LINKED LIST
 WALK THE ARRAY AND DETERMIN WHICH IS THE MINIMUM, IF NUM < 10000 MAKE MIN = 1, HAVE INDEX OF NODE WITH THE SMALLEST NUMBER OF ENTRIES
 
-
+// vertex in the old code will need to be replace with the new code that references the names
 
 // need code of templated class int he driver file so that it knows what kind of code to generate.
  can't generate code for a structure if it doens't know what to include.
  #include "graph.cpp" in the driver file
+
+ Edges is walking through a row in a matrix
 */

@@ -9,7 +9,6 @@ typedef char ItemType;
 #include <iostream>
 #include <string>
 
-
 template<class VertexType>
 // Assumption: VertexType is a type for which the "=", "==", and "<<" are defined
 // graph of ints, floats or characters works by default, but if you wanted to have a graph of data structrures then you need to define these.
@@ -41,5 +40,4 @@ class GraphType
     void ShortestPath(VertexType startVertex, VertexType endVertex, Queue& path);   
 };
 #include "graph.cpp"
-
 #endif
