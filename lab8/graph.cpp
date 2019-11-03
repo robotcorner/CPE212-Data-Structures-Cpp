@@ -1,40 +1,56 @@
-#include<string>
-// #include "LList.h"    // needed
+#include "graph.h"
+#include "LList.h"
+#include <string>
 #include <iostream>
 
+using namespace std;
+
+LList int_array[2000000];  // llist array of 2 million, not good when not all nodes exist
+
 template<class VertexType>
+// Assumption: VertexType is a type for which the "=", "==", 
+// and "<<" are defined
 GraphType<VertexType>::GraphType()
-// Post: Arrays of size 50 are dynamically allocated for
-//       marks and vertices. currentVertex is set to 0;
-//       maxVertices is set to 50.
 {
+  int i;
   currentVertex = 0;
   maxVertices = 50;
-  vertices = new VertexType[50];
+  count = new int[50];
   marks = new bool[50];
+  for (i = 0; i < maxVertices++; ++i) marks[i] = 0;
+  for (i = 0; i < maxVertices++; ++i) count[i] = 0;
+  // vertices = new VertexType[50];
 }
 
 template<class VertexType>
 GraphType<VertexType>::GraphType(int maxV)
-// Post: Arrays of size maxV are dynamically allocated for
-//       marks and vertices.
+// Post: Arrays of size maxV are dynamically allocated for marks and vertices.
 //       currentVertex is set to 0; maxVertices is set to maxV.
 {
   currentVertex = 0;
   maxVertices = maxV;
-  vertices = new VertexType[maxV];
+  count = new int[50];  
   marks = new bool[maxV];
+  for (i = 0; i < maxVertices++; ++i) marks[i] = 0;
+  for (i = 0; i < maxVertices++; ++i) count[i] = 0;  
+  // vertices = new VertexType[maxV];
 }
 
 template<class VertexType>
 GraphType<VertexType>::~GraphType()
 // Post: Arrays for vertices and marks have been deallocated.
 {
-  delete [] vertices;
+  // delete [] vertices;
   delete [] marks;
+  delete [] count;
+  // delete [] list_array;
 }
 
 const int NULL_EDGE = 0;
+
+/*****************************************/
+// NO NEED for AddVertex as all vertex names are numbers 0,1,2,3,  */
+/*
 
 template<class VertexType>
 void GraphType<VertexType>::AddVertex(VertexType vertex)
@@ -54,6 +70,12 @@ void GraphType<VertexType>::AddVertex(VertexType vertex)
   currentVertex++;
 }
 
+*/
+
+/*****************************************/
+// NO NEED for AddVertex as all vertex names are numbers 0,1,2,3,  */
+/*
+
 template<class VertexType>
 int GraphType<VertexType>::IndexIs(VertexType* vertices, VertexType vertex)
 {
@@ -64,24 +86,28 @@ int GraphType<VertexType>::IndexIs(VertexType* vertices, VertexType vertex)
   return index; // Returns the index of vertex in vertices.
 }
 
+*/
+
 template<class VertexType>
 void GraphType<VertexType>::AddEdge(VertexType fromVertex, VertexType toVertex, int weight)
 // Post: Edge (fromVertex, toVertex) is stored in edges.
 {
-  int row;
-  int col;
+  // THIS TRANSLATES THE NAME INTO AN INTEGER - comment it
+  // int row;
+  // int col;
+  // row = IndexIs(vertices, fromVertex);
+  // col = IndexIs(vertices, toVertex);
+  // edges[row][col] = weight; // putting the weights in the edges
 
-  // ADD NODE TO GRAPH WITH VALUE
-  // MODIFY SOMETHING RIGHT HERE
+  count[fromVertex] ++; // add to the count
 
-  // THIS TRANSLATES THE NAME INTO AN INTEGER - REMOVE IT
-  row = IndexIs(vertices, fromVertex);
-  col = IndexIs(vertices, toVertex);
-
-  // REPLACED BY AN OPERATION THAT ADDS AND ELEMENT TO A LINKED LIST
-  // ROW REPACED WITH LINKED LIST  
-  edges[row][col] = weight; // putting the weights in the edges
+// TODO: Modify Stuff Here
+// ---- Add the node to the linked list for this from Node
+// add a linked list element at the fromVertex list for toVertex
+  int_array[fromVertex].InsertasFirst(toVertex);
 }
+
+/* ---- ALL THE WEIGHTS ARE 1 ----------------------
 
 template<class VertexType>
 int GraphType<VertexType>::WeightIs(VertexType fromVertex, VertexType toVertex)
@@ -95,8 +121,9 @@ int GraphType<VertexType>::WeightIs(VertexType fromVertex, VertexType toVertex)
   col = IndexIs(vertices, toVertex);
   return edges[row][col]; // check the weight in the edge
 }
+*/
 
-// WILL NEED TO HANDLE INTEGERS INSTEAD OF NAMES
+// TODO: WILL NEED TO HANDLE INTEGERS INSTEAD OF NAMES - NO HELP PROVIDED
 template<class VertexType>
 void GraphType<VertexType>::GetToVertices(VertexType vertex, Queue& adjVertices)
 {
@@ -108,11 +135,10 @@ void GraphType<VertexType>::GetToVertices(VertexType vertex, Queue& adjVertices)
   for (toIndex = 0; toIndex < currentVertex; toIndex++)
     if (edges[fromIndex][toIndex] != NULL_EDGE)
       adjVertices.Enqueue(vertices[toIndex]);
-
-  
-
 }
 
+// TODO: DepthFirstSearch WILL NOT WORK UNTIL GetToVertices IS FIXED
+/*
 template<class VertexType>
 void GraphType<VertexType>::DepthFirstSearch(GraphType<VertexType> graph, VertexType startVertex, VertexType endVertex)
 // Assumes VertexType is a type for which the "==" and "<<"
@@ -157,6 +183,9 @@ void GraphType<VertexType>::DepthFirstSearch(GraphType<VertexType> graph, Vertex
   if (!found)
     cout << "Path not found." << endl;
 }
+*/
+
+/* TODO: MIHGT WORK if GetToVertices IS FIXED
 
 template<class VertexType>
 void GraphType<VertexType>::BreadthFirstSearch(GraphType<VertexType> graph, VertexType startVertex, VertexType endVertex)
@@ -202,6 +231,7 @@ void GraphType<VertexType>::BreadthFirstSearch(GraphType<VertexType> graph, Vert
   if (!found)
     cout << "Path not found." << endl;
 }
+*/
 
 template<class VertexType>
 void GraphType<VertexType>::ClearMarks()
@@ -215,29 +245,38 @@ void GraphType<VertexType>::ClearMarks()
 template<class VertexType>
 void GraphType<VertexType>::MarkVertex(VertexType vertex) //marks vertex when its passed in the search
 {
-  for (int i = 0; i < currentVertex; i++)
+  marks[vertex] = true;
+  // OLD CODE
+  /* for (int i = 0; i < currentVertex; i++)
   {
     if (vertex == vertices[i])
     {
       marks[i] = true;
     }
-  } 
+  }
+  */
 }
 
 template<class VertexType>
 bool GraphType<VertexType>::IsMarked(VertexType vertex) // checks if vertex is marked
 {
-  for (int i = 0; i < currentVertex; i++)
+  return(marks[vertex]);
+  // OLD CODE
+  /* for (int i = 0; i < currentVertex; i++)
   {
     if (vertex == vertices[i])
     {
       return (marks[i]);
     }
   }
-
-  return false; // Should never happen
+  */
+  // return false; // Should never happen
 }
 
+// TODO: 
+// Needs rewrite because edges is replaced by a linked list
+//  also index is no longer needed as all vertice
+/*
 template<class VertexType>
 void GraphType<VertexType>::ShortestPath(VertexType startVertex, VertexType endVertex, Queue& path)
 {
@@ -292,11 +331,44 @@ void GraphType<VertexType>::ShortestPath(VertexType startVertex, VertexType endV
     return;
   }
 }
-
-// INCLUDE void MinNode(); // find one with the smallest number and largest number of outward arcs
-// Include void MaxNode();
-// can just return one of them
-/*
-#include "graphx.cpp"
-#endif
 */
+
+template<class VertexType>
+void GraphType<VertexType>::MaxNode() {
+  // chose the first node as the max 
+  int i;
+  int max = count[0];
+  int maxnodex = 0;
+  for(i = 0; i < maxVertices; i++) {
+    if(max < count[i]) {
+      max = count[i];
+      maxnodex = i;
+    }
+  }
+  cout << "max node was " << maxnodex << " max count was " << max << endl;
+  return ;
+}
+
+// INCLUDE void MinNode(); 
+// find one with the smallest number and largest number of outward arcs
+// can just return one of them
+
+
+// TODO: Fix the logic inside this
+template<class VertexType>
+void GraphType<VertexType>::MinNode() {
+  // chose the first node as the min
+  int i;
+  int min = count[0];
+  int minnodex = 0;
+  for(i = 0; i < maxVertices; i++) {
+    if(max < count[i]) {
+      min = count[i];
+      minNode = i;
+    }
+  }
+  cout << "Min node was " << minNode << " Min count was " << min << endl;
+  return ;
+}
+
+
