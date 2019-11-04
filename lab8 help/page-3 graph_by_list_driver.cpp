@@ -1,5 +1,5 @@
 #include <iostream>
-#include "graphx.h"
+#include "graph.h"
 
 using namespace std;
 
@@ -36,9 +36,8 @@ cout << "starting graph by list " << endl;
 //   say a node number like 4000000
 cin >> vfrom >> vto ;
 cout << "from vertex " << vfrom << "to vertex " << vto << endl;
-
-// note we are using a AddEdge method that looks like the original
 mygraph.AddEdge (vfrom, vto, ArcLength);
+
 cin >> vfrom >> vto ;
 cout << "from vertex " << vfrom << "to vertex " << vto << endl;
 mygraph.AddEdge(vfrom, vto, ArcLength);

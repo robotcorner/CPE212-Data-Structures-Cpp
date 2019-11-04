@@ -2,7 +2,7 @@
 
 //const int MAX_SIZE = 100;		// Maximum stack size 
 const int MAX_SIZE = 3;			  // Maximum stack size for testing throw
-typedef char ItemType;
+typedef int ItemType;
 class Stack			// Array-based Stack class
 {
  private:

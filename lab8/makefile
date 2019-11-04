@@ -1,20 +1,13 @@
 # Makefile for Graphs Assignment
 
 # Graph Driver
-graph_driver:  graph_driver.o LList.o queue.o stack.o
-	g++  graph_driver.o LList.o queue.o stack.o -o graph_driver
-
-graph_driver.o: graph_driver.cpp graph.h	# This could be messy here
-	g++ -Wall -c -g graph_driver.cpp
-
-# ---- Kulick's GRAPH DRIVER -----------------------------------------
-# graph_by_list_driver:  LList.o queue.o stack.o graph_by_list_driver.o 
-# 	 g++ -g LList.o queue.o stack.o graph_by_list_driver.o -o graph_by_list_driver
-# graph_by_list.o: graph_by_list.cpp graph_by_list.h
-#	 g++ --g Wall -c -g graph_by_list.cpp
-# --------------------------------------------------------------------
+graph_driver:  LList.o queue.o stack.o graph_driver.o
+	g++  LList.o queue.o stack.o graph_driver.o -o graph_driver
 
 # Dependencies for Graph Driver
+graph.o: graph.cpp.cpp graph.h # This could be messy here
+	g++ -Wall -c -g graph.cpp
+
 queue.o: queue.cpp queue.h
 	g++ -Wall -c -g queue.cpp
 

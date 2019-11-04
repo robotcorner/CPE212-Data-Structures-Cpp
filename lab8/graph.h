@@ -7,8 +7,8 @@ typedef int ItemType;
 
 #include "queue.h"
 #include "stack.h"
-#include "LList.h"  
 #include <iostream>
+#include "LList.h"  
 #include <string>
 
 template<class VertexType>
@@ -24,12 +24,12 @@ class GraphType
     bool* marks; // marks[i] is mark for vertices[i].
 
     // Won't Use
-    VertexType* vertices; // implemented as array (possibly)    
-    int edges[50][50]; //2d 2500 elements
+    //VertexType* vertices; // implemented as array (possibly)    
+    //int edges[50][50]; //2d 2500 elements
 
   public:
     GraphType();
-    GraphType(int maxV);
+    GraphType(int);
     ~GraphType();
     void MakeEmpty();
     bool IsEmpty() const;
@@ -38,15 +38,16 @@ class GraphType
     void AddEdge(VertexType, VertexType, int);
     //int WeightIs(VertexType, VertexType);
     //int IndexIs(VertexType* vertices, VertexType vertex);
-    void GetToVertices(VertexType, Queue&);  // Needs Fixed if want Searching
-    void ClearMarks();    // Fix this
-    void MarkVertex(VertexType);    // Fix this
-    bool IsMarked(VertexType);    // Fix this
-    void DepthFirstSearch(GraphType<VertexType> graph, VertexType startVertex, VertexType endVertex); // Fix this
-    void BreadthFirstSearch(GraphType<VertexType> graph, VertexType startVertex, VertexType endVertex); // Fix this
-    void ShortestPath(VertexType startVertex, VertexType endVertex, Queue& path); // Fix this   
+    //void GetToVertices(VertexType, Queue&);  // Needs Fixed if want Searching
+    //void ClearMarks();    // Fix this
+    //void MarkVertex(VertexType);    // Fix this
+    //bool IsMarked(VertexType);    // Fix this
+    //void DepthFirstSearch(GraphType<VertexType> graph, VertexType startVertex, VertexType endVertex); // Fix this
+    //void BreadthFirstSearch(GraphType<VertexType> graph, VertexType startVertex, VertexType endVertex); // Fix this
+    //void ShortestPath(VertexType startVertex, VertexType endVertex, Queue& path); // Fix this   
     void MaxNode();  // Find the maxiumum number of connections to a node
     void MinNode();  // Find the minimum number of connections to a node
 };
+
 #include "graph.cpp"
 #endif

@@ -1,7 +1,7 @@
 
 //*******  queue.h header **********
 
-typedef char ItemType;
+typedef int ItemType;
 
 class Queue
 {

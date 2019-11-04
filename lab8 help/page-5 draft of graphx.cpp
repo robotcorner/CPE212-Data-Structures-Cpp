@@ -11,38 +11,7 @@ using namespace std;
 
   LList  my_array[2000000];
 
-template<class VertexType>
-GraphXType<VertexType>::GraphXType()
-// Post: Arrays of size 50 are dynamically allocated for
-//       marks and vertices. numVertices is set to 0;
-//       maxVertices is set to 50.
-{
-  int i;
-  numVertices = 0;
-  maxVertices = 50;
-  marks = new bool[50];
-  count = new int[50];
 
-  for (i=0;i<maxVertices;i++)  marks[i] = 0;
-  for (i=0;i<maxVertices;i++)  count[i] = 0;
-}
-
-
-template<class VertexType>
-GraphXType<VertexType>::GraphXType(int maxV)
-// Post: Arrays of size maxV are dynamically allocated for
-//       marks and vertices.
-//       numVertices is set to 0; maxVertices is set to maxV.
-{
-  int i;
-  numVertices = 0;
-  maxVertices = maxV;
-  marks = new bool[maxV];
-  count = new int[maxV];
-
-  for (i=0;i<maxVertices;i++)   marks[i] = 0;
-  for (i=0;i<maxVertices;i++)   count[i] = 0;
-}
 
 template<class VertexType>
 GraphXType<VertexType>::~GraphXType()

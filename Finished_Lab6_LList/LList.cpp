@@ -159,9 +159,6 @@ LList::~LList() // Destructor
     while(!IsEmpty()) {     // loop deallocates all list times.
         RemoveFirst(listItem);
     }
-    Print();
-    cout<< "Destructor Called" << endl;
 }
-
 // Space is returned when the program is exited.
 
