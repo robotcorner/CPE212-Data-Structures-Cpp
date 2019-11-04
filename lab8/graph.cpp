@@ -34,8 +34,8 @@ GraphType<VertexType>::GraphType(int max)
   maxVertices = max;  
   marks = new bool[max];
   count = new int[max];
-  for (i = 0; i < maxVertices++; ++i) marks[i] = 0;
-  for (i = 0; i < maxVertices++; ++i) count[i] = 0;  
+  for (i = 0; i < maxVertices; ++i) marks[i] = 0;
+  for (i = 0; i < maxVertices; ++i) count[i] = 0;  
   // vertices = new VertexType[maxV];
 
 }
@@ -350,7 +350,6 @@ void GraphType<VertexType>::MaxNode() {
     }
   }
   cout << "max node was " << maxnodex << " max count was " << max << endl;
-  return ;
 }
 
 // INCLUDE void MinNode(); 
