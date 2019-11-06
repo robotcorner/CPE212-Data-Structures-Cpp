@@ -1,0 +1,34 @@
+# this is a shortened version of the graphx.h file
+# notice that at the beginning is the standard ifdef wrapper 
+# notice that at the end of the file is a #include "graphx.cpp"
+# this means anyone including graphx.h in their file will 
+# also include a copy of the graphx.cpp file  
+# this is how the templates are resolved since the driver program
+# this is why the makefile does not include a description for graphx.o
+# and why it is not in the link command for the driver file 
+# includes this file and thus the graphx.cpp file
+
+#ifndef GRAPHX_H
+#define GRAPHX_H
+// Forward declaration of ItemType
+
+typedef int ItemType;
+
+#include "queue.h"
+#include "stack.h"
+#include "LList.h"
+#include <iostream>
+#include<string>
+
+template<class VertexType>
+// Assumption: VertexType is a type for which the "=", "==", and "<<" are defined
+class GraphXType
+{
+/* BODY of graphx.h goes here it is missing in this document */
+    void BreadthFirstSearch(GraphXType<VertexType> graph, VertexType startVertex, VertexType endVertex);
+    void ShortestPath(VertexType startVertex, VertexType endVertex, Queue& path);   
+    void MaxNode();
+};
+#include "graphx.cpp"
+
+#endif
