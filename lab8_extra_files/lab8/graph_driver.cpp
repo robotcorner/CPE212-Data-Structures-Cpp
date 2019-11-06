@@ -10,6 +10,7 @@
 using namespace std;
 //int main(int argc, char** argv)
 int main() 
+
 {
   const int MAX_V = 1965206;  // We have 1965206 Nodes
   /*if (argc != 3) {
@@ -22,9 +23,7 @@ int main()
   */
 
   ifstream input;
-  ofstream output;
   input.open("words2xx.txt");
-  output.open("out1.txt");
   
   cout << "things work here" << endl;
   cout << "both gdb and valgrind don't determine the problem" << endl;
@@ -38,6 +37,7 @@ int main()
 
   // Test 1
   input >> vFrom >> vTo;
+<<<<<<< HEAD:lab8_extra_files/lab8/graph_driver.cpp
   cout << "vfrom: " << vFrom << " vTo: " << "\n";
   //intGraph.AddEdge(vFrom, vTo, arcLength);
 
@@ -50,10 +50,25 @@ int main()
   input >> vFrom >> vTo;
   cout << "vfrom: " << vFrom << " vTo: " << "\n";
   //intGraph.AddEdge(vFrom, vTo, arcLength);
+=======
+  cout << "vfrom: " << vFrom << " vTo: " << vTo << "\n";
+  intGraph.AddEdge(vFrom, vTo, arcLength);
+
+  // Test 2
+  input >> vFrom >> vTo;
+  cout << "vfrom: " << vFrom << " vTo: " << vTo << "\n";
+  intGraph.AddEdge(vFrom, vTo, arcLength);
+
+  // Test 3
+  input >> vFrom >> vTo;
+  cout << "vfrom: " << vFrom << " vTo: " << vTo << "\n";
+  intGraph.AddEdge(vFrom, vTo, arcLength);
+>>>>>>> 71520975c78e1c5c52bfb42ad6f0cb672afcd7b3:lab8/graph_driver.cpp
 
   for(i=0; i<MAX_V; i++)
   {
     input >> vFrom >> vTo;
+<<<<<<< HEAD:lab8_extra_files/lab8/graph_driver.cpp
     //intGraph.AddEdge(vFrom, vTo, arcLength);
     //intGraph.AddEdge(v, /*toVertex,*/ w);
   }
@@ -62,6 +77,13 @@ int main()
   cout << "Min Node Value is: "; // Node with smallest number of edges / connections
   //intGraph.MinNode();
   output.close();
+=======
+    intGraph.AddEdge(vFrom, vTo, arcLength);
+  }
+  cout << endl;
+  intGraph.MaxNode();
+  intGraph.MinNode();
+>>>>>>> 71520975c78e1c5c52bfb42ad6f0cb672afcd7b3:lab8/graph_driver.cpp
   input.close();
   cout << endl;
   return 0;
