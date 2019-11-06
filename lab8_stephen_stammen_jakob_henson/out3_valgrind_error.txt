@@ -40,6 +40,9 @@ valgrind:  stripped ld.so (or whatever the dynamic linker .so is called)
 valgrind:  that exports the above-named function using the standard
 valgrind:  calling conventions for this platform.  The package you need
 valgrind:  to install for fix (1) is called
+----------------------------------
+I DOWNLOADED WHAT IT TOLD ME AND THIS ERROR IS THE SAME
+-----------------------------
 valgrind:  
 valgrind:    On Debian, Ubuntu:                 libc6-dbg
 valgrind:    On SuSE, openSuSE, Fedora, RHEL:   glibc-debuginfo
