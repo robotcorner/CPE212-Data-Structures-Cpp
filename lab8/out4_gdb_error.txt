@@ -1,7 +1,0 @@
-(gdb) run
-Starting program: /home/stephen/Desktop/lab8_graph/lab8/graph_driver 
-things work here
-
-Program received signal SIGSEGV, Segmentation fault.
-0x0000555555555f15 in GraphType<int>::GraphType(int) ()
-
