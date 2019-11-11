@@ -1,0 +1,25 @@
+#Makefile for graphs assignment 
+
+#//NOTE NO GRAPH.O  Being templated it is included in graph.h
+#//
+#//
+
+graph_by_list_driver:  LList.o queue.o stack.o graph_by_list_driver.o 
+	g++ -g LList.o queue.o stack.o graph_by_list_driver.o -o graph_by_list_driver
+graph_by_list.o: graph_by_list.cpp graph_by_list.h
+	g++ --g Wall -c -g graph_by_list.cpp
+
+queue.o: queue.cpp queue.h
+	g++ -Wall -c -g queue.cpp
+stack.o: stack.cpp stack.h
+	g++ -Wall -c -g stack.cpp
+LList.o: LList.cpp LList.h
+	g++ -Wall -c -g LList.cpp
+
+clean:
+	rm *.o
+
+#As discussed in class, templated classes like graph must be explicitly included
+#in the driver files that are using them because the g++ compiler needs to know 
+#which template types are used so it can compiler appropriate versions of the
+#templated class (for example, int, char, float, bool, etc.
