@@ -1,6 +1,6 @@
 // Stephen Stammen and Jakob
 #define DEBUG 0
-#define SIZE 5000000
+#define SIZE 5000//000
 #include <stdlib.h>
 #include <iostream>
 #include <sys/time.h>
@@ -296,9 +296,26 @@ int* arr10 = new int[SIZE];
 
 int main ()
 {
+  cout << "\n\nThis program: " <<
+  "\n1) Takes in 10 arrays of 'SIZE' each created from different files" <<
+  "\n2) Sorts each one with QuickSort" <<
+  "\n3) Copies that memory of each sorted array to one large array" <<
+  "\n4) Uses the MergeSort operation to sort the large array" <<
+  "\n5) Outputs the time required for each step and the final sorted array as your chosen output file\n\n";
+
   int numValues = SIZE;
   int i, zero;
   zero = 0;
+  
+  time_t start_time, end_time; // ORIGINAL TIME METHOD  
+  struct timeval start, end; // BETTER TIME METHOD
+  long int seconds1, seconds2, seconds3, micro1, micro2, micro3;
+
+  cout << "Times are as follows: \n1) gettimeofday(): \n2) time(NULL): \n";
+   
+// ---- INPUT ARRAYS AND TIME
+  start_time = time(NULL);
+  gettimeofday(&start, NULL); // get start time
 
   InputArray("xaa.txt", arr1);
   InputArray("xab.txt", arr2);
@@ -310,16 +327,18 @@ int main ()
   InputArray("xah.txt", arr8);
   InputArray("xai.txt", arr9);
   InputArray("xaj.txt", arr10);
+
+  end_time = time(NULL);
+  gettimeofday(&end, NULL); // get end time
+  seconds1 = end.tv_sec - start.tv_sec; // find elapsed time
+  micro1 = end.tv_usec  - start.tv_usec;
   
-  // ORIGINAL TIME METHOD
-  time_t start_time, end_time;
+  cout << endl << "Time to input 10 Arrays of integers: "<< seconds1 << " seconds, " << micro1 << "microseconds " <<endl;
+  cout << "Time to input 10 Arrays of integers: "<< end_time-start_time << " seconds " << endl;
 
-  // BETTER TIME METHOD
-  struct timeval start, end;
-  long int seconds, useconds;
-
-  gettimeofday(&start, NULL); // get start time
+// ---- QUICKSORT ARRAYS AND TIME
   start_time = time(NULL);
+  gettimeofday(&start, NULL); // get start time
 
   QuickSort(arr1, zero, numValues-1);
   QuickSort(arr2, zero, numValues-1);
@@ -331,16 +350,16 @@ int main ()
   QuickSort(arr8, zero, numValues-1);
   QuickSort(arr9, zero, numValues-1);
   QuickSort(arr10, zero, numValues-1);
-
-  gettimeofday(&end, NULL); // get end time
-  end_time = time(NULL);
-
-  seconds = end.tv_sec - start.tv_sec; // find elapsed time
-  useconds = end.tv_usec  - start.tv_usec;
-  useconds = (useconds / 1000);
   
-  cout << " total time was " << seconds << " seconds and " << useconds << "microseconds " <<endl;
-  cout << " Time to Quicksort 10 Arrays of "<<SIZE<<" integers: "<< end_time-start_time << " seconds " << endl;
+  end_time = time(NULL);
+  gettimeofday(&end, NULL); // get end time
+  seconds2 = end.tv_sec - start.tv_sec; // find elapsed time
+  micro2 = end.tv_usec  - start.tv_usec;
+  
+  cout << endl <<"Time to Quicksort 10 Arrays of "<< SIZE <<" integers: "<< seconds2 << " seconds, " << micro2 << "microseconds " <<endl;
+  cout << "Time to Quicksort 10 Arrays of "<< SIZE<< " integers: "<< end_time-start_time << " seconds " << endl;
+  
+// ---- COPY EACH ARRAY TO BIG ARRAY OF 50,000,000
 
   memcpy(arrSorted, arr1, SIZE * sizeof(int));
   delete [] arr1;  
@@ -372,17 +391,25 @@ int main ()
   memcpy(&arrSorted[SIZE*9], arr10, SIZE * sizeof(int));
   delete [] arr10;
 
-  
+// ---- MERGE SORT AND TIME
+  start_time = time(NULL);
+  gettimeofday(&start, NULL); // get start time
+
   MergeSort(arrSorted, 0, (SIZE*10)-1);
   
-  cout << " Merge Sort Items with : " << SIZE << " took " << end_time-start_time << " seconds " << endl;
+  end_time = time(NULL);
+  gettimeofday(&end, NULL); // get end timE
+  seconds3 = end.tv_sec - start.tv_sec; // find elapsed time
+  micro3 = end.tv_usec  - start.tv_usec;
   
+  cout << endl << "Time to MergeSort "<<SIZE*10<<" integers: "<< seconds3 << " seconds, " << micro3 << "microseconds " <<endl;
+  cout << "Time to MergeSort "<<SIZE*10<<" integers: "<< end_time-start_time << " seconds " << endl;
+
+// ---- OUTPUT FILE OF THE SORTED LARGE ARRAY
   string fileOut;
-  /*
-  cout << "Name your sorted file: ";
+  /* cout << "Name your sorted file: ";
   cin >> fileOut;
-  cout << endl;
-  */
+  cout << endl; */
   fileOut = "out.txt";
   OutputArray(fileOut, arrSorted);
   
@@ -406,3 +433,19 @@ int main ()
   //print a few before 
   for(i=0;i<5;i++) cout << "value before merge sort " << i << " was " << values[i] << endl;
   */
+
+ /*
+ /*
+ For this lab, 
+•1- create a data file of 50 million 3 digit random numbers. 
+•2- Test two existing sorting algorithms to determine how many data items they can sort.  
+ Measure and report their time using the functions described in the file  fine_grain_time.cpp
+•3- divide the 50 million items into as many files as is required to perform the sort on each 
+ of the individual files. For example if the sort algorithm you chose can sort 1 million items, 
+ then create 50 separate files and sort each file individually. Under no conditions should you
+  have less than 10 files even if you can.
+•4- merge each of individually sorted files into one final sorted file with 50 million items.  
+•5- To verify that your work is correct, compare 
+  your final result to that obtained by applying the sort command (man 1 sort) to your original
+   file and see if they agree (man 1 diff).
+*/
